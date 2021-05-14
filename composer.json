@@ -1,0 +1,40 @@
+{
+    "name": "durimjusaj/ezeep-blue-api",
+    "description": "Cloud Printing – anytime, anywhere",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "ezeep",
+        "ezeep-blue-api",
+        "ezeep sdk",
+        "ezeep print api",
+        "printing"
+    ],
+    "homepage": "https://www.ezeep.com/",
+    "require": {
+        "php": "^7.4",
+        "guzzlehttp/guzzle": "^7.3",
+        "myclabs/php-enum": "^1.8"
+    },
+    "authors": [
+        {
+            "name": "Durim Jusaj",
+            "email": "jusajdurim@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EzeepBlueApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EzeepBlueApi\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

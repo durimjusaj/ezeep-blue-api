@@ -1,0 +1,15 @@
+<?php
+
+require_once('../vendor/autoload.php');
+
+$client = new EzeepBlueApi\Client(new EzeepBlueApi\Config(
+    'id8qr7YpSlewExDTuB08n3MQeVOa5vGnlJqKjv80',
+    'inQHouizBTnb4qHUy5AVUqvPGJMsMQOQIRnWTPXITq51PS1uyJnDHPfArpThCDkJRGfLRItnai2TkXQsedaPJjZ03RWyUgmNX0S85ZrjgT5mccNhqd1zX1v793oalLz3',
+    'http://localhost:3000/code',
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FjY291bnQuZXplZXAuY29tIiwiZXhwIjoxNjIwODI0NTEzLCJpYXQiOjE2MjA4MjA5MTMsInNjb3BlcyI6IiIsInN1YiI6Ijk5MDM0NTIxLTdlZGQtNDVkYi04YjZlLWYxMzI1NzEwMzI3YiIsIm9yZyI6IjJiZjBiNzI2LTRmZTAtNDQ0Mi04NDk4LWY3NTFiZDY5NmVmOSIsInJvbCI6ImFkbWluIn0.Pl0RaCaorzGngNuYyN2SOySGkrPLUYvT4oBIt_vlJTd-YADkTS51hXFg8a4Y773tozXwH3jDnd6CAH3ROymEJqy0G-1DmULI3XxXpzAi_4Rot7K7DNl37VHeuzpQJdR3oMTlAIXtMKG_qwwdKzF86AXQZSkKZfbsnMsRIOCnHO9xW5Pow9OOO0cMH90iF0KMY07sxTQTA6kLzF5yIBDcsVymh4JzhEGo2tKivFedY52XNiV2iP1kGxI2O_B0MCQgxLKckPVTuaR3gdfe3Djn-xynNdpiU9jR-2m3UEyo6JqqZhaJYh1KpHBUn5A1zl4x9TQyu-Kc439poy8H7riyzw',
+    'lfxtAngVWZ6IwNYjecXq6YRrenB9ZfOR'
+));
+
+
+print '<pre>';
+print_r($client->refreshToken());
