@@ -13,7 +13,7 @@
     "homepage": "https://www.ezeep.com/",
     "require": {
         "php": "^7.4",
-        "guzzlehttp/guzzle": "^7.2.0",
+        "guzzlehttp/guzzle": "^7",
         "myclabs/php-enum": "^1.8"
     },
     "authors": [
