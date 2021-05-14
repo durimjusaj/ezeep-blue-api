@@ -232,4 +232,29 @@ class Client
         }
     }
 
+    /**
+     * Returns if the access_token is expired.
+     * @return bool Returns True if the access_token is expired.
+     */
+    public function isAccessTokenExpired(): bool
+    {
+        if (!$this->config->getAccessToken()) {
+            return true;
+        }
+
+        $created = 0;
+        $accessToken = $this->config->getAccessToken();
+        if (substr_count($accessToken, '.') == 2) {
+            $parts = explode('.', $accessToken);
+            $payload = json_decode(base64_decode($parts[1]), true);
+            if ($payload && isset($payload['iat'])) {
+                $created = $payload['iat'];
+            }
+        }
+
+        // If the token is set to expire in the next 30 seconds.
+        return ($created + ($this->config->getExpiresIn() - 30)) < time();
+    }
+
+
 }

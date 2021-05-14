@@ -42,6 +42,18 @@ class Config
      * @var string|null
      */
     private ?string $refreshToken;
+    /**
+     * @var mixed
+     */
+    private $tokenType;
+    /**
+     * @var mixed
+     */
+    private $expiresIn;
+    /**
+     * @var mixed
+     */
+    private $scope;
 
     /**
      * Config constructor.
@@ -51,13 +63,19 @@ class Config
      * @param string|null $accessToken
      * @param string|null $refreshToken
      */
-    public function __construct(string $client_id, string $client_secret, string $redirect_uri, string $accessToken = null, string $refreshToken = null)
+    public function __construct(string $client_id, string $client_secret, string $redirect_uri, ?array $authorizationData = [])
     {
         $this->client_id = $client_id;
         $this->client_secret = $client_secret;
         $this->redirectUri = $redirect_uri;
-        $this->accessToken = $accessToken;
-        $this->refreshToken = $refreshToken;
+        
+        if (is_array($authorizationData) && count($authorizationData) == 5) {
+            $this->accessToken = $authorizationData['access_token'];
+            $this->refreshToken = $authorizationData['refresh_token'];
+            $this->tokenType = $authorizationData['token_type'];
+            $this->expiresIn = $authorizationData['expires_in'];
+            $this->scope = $authorizationData['scope'];
+        }
     }
 
     /**
@@ -172,6 +190,53 @@ class Config
         $this->refreshToken = $refreshToken;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTokenType()
+    {
+        return $this->tokenType;
+    }
+
+    /**
+     * @param mixed $tokenType
+     */
+    public function setTokenType($tokenType): void
+    {
+        $this->tokenType = $tokenType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpiresIn()
+    {
+        return $this->expiresIn;
+    }
+
+    /**
+     * @param mixed $expiresIn
+     */
+    public function setExpiresIn($expiresIn): void
+    {
+        $this->expiresIn = $expiresIn;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
+     * @param mixed $scope
+     */
+    public function setScope($scope): void
+    {
+        $this->scope = $scope;
+    }
 
     /**
      * @return string
