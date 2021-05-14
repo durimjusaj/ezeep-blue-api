@@ -20,6 +20,5 @@ class AccountApi
     public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->client->accountClient();
     }
 }

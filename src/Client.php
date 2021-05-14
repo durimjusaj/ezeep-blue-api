@@ -133,9 +133,9 @@ class Client
                 ],
             ]);
 
-            return $result->getBody()->getContents();
+            return $this->result($result->getBody()->getContents());
         } catch (ClientException $exception) {
-            return $exception->getResponse()->getBody()->getContents();
+            return $this->result($exception->getResponse()->getBody()->getContents());
         }
     }
 
@@ -161,9 +161,9 @@ class Client
                 ],
             ]);
 
-            return $result->getBody()->getContents();
+            return $this->result($result->getBody()->getContents());
         } catch (ClientException $exception) {
-            return $exception->getResponse()->getBody()->getContents();
+            return $this->result($exception->getResponse()->getBody()->getContents());
         }
     }
 
@@ -176,60 +176,46 @@ class Client
             $params = array_filter($params);
 
             $result = $this->client->get($endpoints->getValue(), $params);
-            return $result->getBody()->getContents();
+            return $this->result($result->getBody()->getContents());
         } catch (ClientException $exception) {
-            return $exception->getResponse()->getBody()->getContents();
+            return $this->result($exception->getResponse()->getBody()->getContents());
         }
     }
 
+    /**
+     * @param \EzeepBlueApi\Enums\Endpoints $endpoints
+     * @param array $params
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function post(Endpoints $endpoints, array $params = [])
     {
         try {
             $params = array_filter($params);
 
             $result = $this->client->post($endpoints->getValue(), ['json' => $params]);
-            return $result->getBody()->getContents();
+            return $this->result($result->getBody()->getContents());
         } catch (ClientException $exception) {
-            print $exception->getMessage();
-            return $exception->getResponse()->getBody()->getContents();
+            return $this->result($exception->getResponse()->getBody()->getContents());
         }
     }
 
+    /**
+     * @param \EzeepBlueApi\Enums\Endpoints $endpoints
+     * @param array $params
+     */
     public function put(Endpoints $endpoints, array $params = [])
     {
 
     }
 
+    /**
+     * @param \EzeepBlueApi\Enums\Endpoints $endpoints
+     * @param array $params
+     */
     public function delete(Endpoints $endpoints, array $params = [])
     {
 
-    }
-
-    public function testAuth()
-    {
-        $client = new HttpClient([
-            'base_uri' => 'https://accounts.ezeep.com',
-            'headers' => [
-                'Authorization' => "Basic " . $this->config->getSecretHeader(),
-                'content-type' => 'application/x-www-form-urlencoded',
-            ],
-        ]);
-
-        try {
-            $res = $client->request("POST", "/oauth/access_token", [
-                'form_params' => [
-                    'grant_type' => 'password',
-                    'username' => 'jusajdurim@gmail.com',
-                    'password' => '57iDx@cs$cXDLZ$'
-                ],
-            ]);
-
-            return $res->getBody()->getContents();
-
-        } catch (ClientException $exception) {
-            print $exception->getMessage();
-            return $exception->getResponse()->getBody()->getContents();
-        }
     }
 
     /**
@@ -256,5 +242,13 @@ class Client
         return ($created + ($this->config->getExpiresIn() - 30)) < time();
     }
 
+    /**
+     * @param string $result
+     * @return mixed
+     */
+    private function result(string $result)
+    {
+        return json_decode($result, true);
+    }
 
 }
