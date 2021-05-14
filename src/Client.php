@@ -133,7 +133,7 @@ class Client
                 ],
             ]);
 
-            $result->getBody()->getContents();
+            return $result->getBody()->getContents();
         } catch (ClientException $exception) {
             return $exception->getResponse()->getBody()->getContents();
         }
